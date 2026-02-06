@@ -1,52 +1,38 @@
-import java.util.*;
 class Main{
+
     public static void main(String args[]){
-        Scanner sc = new Scanner(System.in);
+        String[] names = {
+                "J&ohn Doe!",
+                "Al[ice Smith?",
+                "Bo>b Brown#",
+                "E//ve Taylor$",
+                "Ben% Brown"
+        };
 
-        int size;
-        SortSubClass s = null;
-
-        while(true){
-            try{
-                System.out.print("Enter array size: ");
-                size = sc.nextInt();
-                if(size<0){
-                    System.out.println("Invalid size");
-                    continue;
-                }
-
-                break;
-            }catch(Exception e){
-                System.out.println("Invalid array size!");
-                sc.nextLine();
-            }
+        System.out.println("Before sorting:");
+        for (int i = 0; i < names.length; i++) {
+            System.out.println((i + 1) + ". " + names[i]);
         }
 
 
-        double[] array = new double[size];
+        for(int i = 0 ; i < names.length ; i++){
+            names[i] = names[i].replaceAll("[^a-zA-Z ]", "");
+        }
 
-
-        for(int i = 0 ; i < size ; i++){
-            while(true){
-                try{
-
-
-                    System.out.print("Enter value at array index " + i + ": ");
-                    array[i] = sc.nextDouble();
-
-                    break;
-                }catch(Exception e){
-                    System.out.println("Invalid array value!");
-                    sc.nextLine();
+        int size = names.length;
+        for(int i = 0; i < size - 1; i++){
+            for(int j = 0; j < size  - i -1 ; j++){
+                if(names[j].compareToIgnoreCase(names[j+1])>0){
+                    String temp = names[j];
+                    names[j] = names[j+1];
+                    names[j+1] = temp;
                 }
             }
         }
-
-
-        s = new SortSubClass(array,size);
-
-        s.unSorted();
-        s.sorted();
-
+        System.out.println();
+        System.out.println("After sorting:");
+        for (int i = 0; i < names.length; i++) {
+            System.out.println((i + 1) + ". " + names[i]);
+        }
     }
 }
