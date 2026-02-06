@@ -1,19 +1,17 @@
-
-public class PayrollCompute extends Payroll {
-
-    private double hoursWorked;
-    private double rate = 450.00;
+import java.text.DecimalFormat;
+class ComputePayroll extends Payroll{
+    private double hrs;
     private double salary;
-    @Override
-    public   void setHours(double hrs){
-        this.hoursWorked = hrs;
+    private DecimalFormat df = new DecimalFormat("#,###.00");
+    public ComputePayroll(double hrs){
+        this.hrs = hrs;
     }
-    @Override
-    public  void compute(){
-        this.salary = rate * hoursWorked;
+
+    public void compute(){
+        this.salary = hrs * 500;
     }
-    @Override
-    public  double display(){
-        return salary;
+    public void display(){
+        System.out.println("Gross Pay: PHP " + df.format(salary));
     }
+
 }
