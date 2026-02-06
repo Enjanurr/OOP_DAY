@@ -1,49 +1,37 @@
 import java.util.*;
-import java.text.DecimalFormat;
 class Main{
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat("0.00");
-        Rectangle r = new Rectangle();
-
-        double l,w;
+        AverageCalculator a = new AverageCalculator();
+        double f,s;
 
         while(true){
             try{
-                System.out.print("Enter length: ");
-                l = sc.nextDouble();
-                if(l < 0){
-                    System.out.println("Invalid length! Value must be postive!");
-                    continue;
-                }
 
-                r.setLength(l);
-
+                System.out.print("Enter first number: ");
+                f = sc.nextDouble();
+                a.setFirst(f);
                 break;
             }catch(InputMismatchException e){
-                System.out.println("Invalid length! Error: " + e);
+                System.out.println("Error: Please enter a valid number.");
                 sc.nextLine();
             }
         }
+
         while(true){
             try{
 
 
-                System.out.print("Enter width: ");
-                w = sc.nextDouble();
-                if(w < 0){
-                    System.out.println("Invalid width! Value must be postive!");
-                    continue;
-                }
-
-
-                r.setWidth(w);
-                System.out.println("Area of the rectangle: " + df.format(r.getArea()));
+                System.out.print("Enter second number: ");
+                s = sc.nextDouble();
+                a.setSecond(s);
+                a.display();
                 break;
             }catch(InputMismatchException e){
-                System.out.println("Invalid width! Error: " + e);
+                System.out.println("Error: Please enter a valid number.");
                 sc.nextLine();
             }
         }
+
     }
 }
