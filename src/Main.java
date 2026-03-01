@@ -1,40 +1,70 @@
+
+import java.util.*;
+
 class Main {
-
-    // Generic method: works for any reference type
-    public static <T> void printGeneric(T value) {
-        System.out.println("Generic value: " + value);
-    }
-
-    // Multiple type parameters (precursor to Map<K, V>)
-    public static <K, V> void printPair(K key, V value) {
-        System.out.println(key + " = " + value);
-    }
-
-    // Bounded generic: only subclasses of Number allowed
-    public static <T extends Number> void computeVoid(T num1, T num2) {
-        double sum = num1.doubleValue() + num2.doubleValue();
-        System.out.println("Sum: " + sum);
-    }
-
-    // Generic method with return type
-    public static <T extends Number> double computeReturn(T num1, T num2) {
-        return num1.doubleValue() + num2.doubleValue();
-    }
-
     public static void main(String[] args) {
-        printGeneric("janur");
-        printGeneric(50);       // int → Integer (autoboxing)
-        printGeneric(67.0);
+     Scanner sc = new Scanner(System.in);
+     Sub<Integer> nums = new Sub<>();
 
-        printPair("age", 20);
-        printPair(1, "one");
 
-        computeVoid(10, 20);
-        computeVoid(3.5, 1.2);
+     int num1,num2;
 
-        double ans1 = computeReturn(10, 20);
-        double ans2 = computeReturn(3.5, 1.2);
+        // Input for num1
+        while (true) {
+            try {
+                System.out.print("Enter num1: ");
+                num1 = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+                sc.nextLine();
+            }
+        }
 
-        System.out.println("Returned answer: " + ans1 + ", " + ans2);
+        // Input for num2
+        while (true) {
+            try {
+                System.out.print("Enter num2: ");
+                num2 = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+                sc.nextLine();
+            }
+        }
+
+        nums.setNum1(num1);
+        nums.setNum2(num2);
+
+        int operation;
+        boolean isEnable = true;
+        while(isEnable){
+            try{
+                System.out.println("\nChoose operation:");
+                System.out.println("1 - Addition");
+                System.out.println("2 - Subtraction");
+                System.out.println("3 - Multiplication");
+                System.out.println("4 - Division");
+                System.out.println("5 - Remainder");
+                System.out.println("0 - Exit");
+                System.out.print("Enter choice: ");
+
+                operation = sc.nextInt();
+
+                switch(operation){
+                    case 0: System.out.println("Exiting......");isEnable = false; // this is how you break a loop with switch
+                    case 1: nums.add();break;
+                    case 2: nums.diff();break;
+                    case 3: nums.multiply();break;
+                    case 4: nums.divide();break;
+                    case 5: nums.rem();break;
+
+                    default: System.out.println("Invalid choice!");
+                }
+            }catch(Exception e){
+                System.out.println("Invalid input!");
+                sc.nextLine();
+            }
+        }
     }
 }
