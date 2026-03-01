@@ -1,40 +1,46 @@
-import java.util.*;
-class Sub implements InterfaceFile{
-    private String[] names = new String[10];
-    private int count = 0;
-    private Scanner sc = new Scanner(System.in);
-    @Override
-    public void add(String input){
-        names[count] = input;
-        this.count++;
-    }
 
-    @Override public void delete(String input){
-        int i ;
-        for( i = 0 ; i < count ; i++){
-            if(names[i].equals(input)) break;
+import java.text.DecimalFormat;
+public class Sub implements Parent{
 
-        }
-        for(int j = i ; j < count -1; j++){
-            names[j] = names[j+1];
+    private double loanAmount,rate;
+    private int month;
+    private DecimalFormat df = new  DecimalFormat("#,##0.00");
+    private DecimalFormat per = new DecimalFormat("0.00");
 
-        }
-        names[count-1] = null;
-        this.count--; }
+    //public Child(){}
 
     @Override
-    public void update(int index){
-
-        System.out.print("Enter text for update: ");
-        String newText = sc.nextLine();
-        names[index] = newText;
-
+    public void setLoanAmount(double loanAmount){
+        this.loanAmount = loanAmount;
     }
-
     @Override
-    public void display(){
-        for(int i = 0 ; i < count ;i++){
-            System.out.println(i + " - " + names[i]);
-        }
+    public void setRate(double rate){
+        this.rate = rate;
     }
+    @Override
+    public void setMonth(int month){
+        this.month = month;
+    }
+    @Override
+    public double totalInterest(){
+        return loanAmount * (rate/100);
+    }
+    @Override
+    public double totalPayment(){
+        return totalInterest() + loanAmount;
+    }
+    @Override
+    public double monthlyPayment(){
+        return totalPayment() / month;
+    }
+    @Override
+    public void display() {
+        System.out.println("Loan Amount        : ₱" + df.format(loanAmount));
+        System.out.println("Interest Rate      : " + per.format(rate) + "%");
+        System.out.println("Loan Duration      : " + month + " months");
+        System.out.println("Total Interest     : ₱" + df.format(totalInterest()));
+        System.out.println("Total Payment      : ₱" + df.format(totalPayment()));
+        System.out.println("Monthly Payment    : ₱" + df.format(monthlyPayment()));
+    }
+
 }

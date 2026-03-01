@@ -4,58 +4,68 @@ class Main{
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         Sub s = new Sub();
-        int choice ;
-        String input ;
+        double loanAmount = 0 ,rate = 0;
+        int month = 0;
+        // loanAmount;
         while(true){
-            System.out.println("Press 1 - To add");
-            System.out.println("Press 2 - To update");
-            System.out.println("Press 3 - To delete");
-            System.out.println("Press 4 - To display");
-            System.out.println("Press 0 - To exit");
-
-
-            while(true){
-                try{
-                    System.out.print("Enter choice :");
-                    choice = sc.nextInt();
-                    sc.nextLine();  // clear the buffer
+            try{
+                System.out.print("Enter amount: ");
+                loanAmount = sc.nextDouble();
+                if(loanAmount<1){
+                    System.out.println("No negative values!");
+                    continue;
+                }else{
+                    s.setLoanAmount(loanAmount);
                     break;
-                }catch(InputMismatchException e){
-                    System.out.println("Invalid choice!");
-                    sc.nextLine();
                 }
+
+            }catch(Exception e){
+                System.out.println("Invalid input!");
+                sc.nextLine();
             }
-            if(choice == 1){
-
-                System.out.print("Enter a text to add : ");
-                input = sc.nextLine();
-                s.add(input);
-                System.out.println("Text has been successfully added!");
-
-
-            }else if(choice == 2){
-
-                int index;
-                System.out.print("Enter index value: ");
-                index = sc.nextInt();
-                s.update(index);
-                System.out.println("Text has been successfully updated!");
-
-            }else if(choice == 3){
-
-                System.out.print("Enter value to delete: ");
-                input = sc.nextLine();
-                s.delete(input);
-                System.out.println("Text has been successfully removed!");
-
-            }else if(choice == 4){
-                System.out.println("The arraylist values are:");
-                s.display();
-            }else if(choice == 0){
-                System.out.println("Good bye!");
-                break;
-            }
-
         }
+
+        //rate
+        while(true){
+            try{
+                System.out.print("Enter Rate (minimum of 1.5): ");
+                rate = sc.nextDouble();
+                if(rate< 1.5){
+                    System.out.println("Minimum of 1.5");
+                    continue;
+                }else{
+                    s.setRate(rate);
+                    break;
+                }
+
+            }catch(Exception e){
+                System.out.println("Invalid input!");
+                sc.nextLine();
+            }
+        }
+        // month
+        while(true){
+            try{
+                System.out.print("Enter month (3 - 36): ");
+                month = sc.nextInt();
+                if(month< 3 || month > 36){
+                    System.out.println("Month must be 3 - 37");
+                    continue;
+                }else{
+                    s.setMonth(month);
+                    break;
+                }
+
+            }catch(Exception e){
+                System.out.println("Invalid input!");
+                sc.nextLine();
+            }
+        }
+
+        s.totalInterest();
+        s.totalPayment();
+        s.monthlyPayment();
+        s.display();
+
     }
 }
